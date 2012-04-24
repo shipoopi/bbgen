@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<package xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" packagerversion="1.4.10" version="2.0" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0        http://pear.php.net/dtd/tasks-1.0.xsd        http://pear.php.net/dtd/package-2.0        http://pear.php.net/dtd/package-2.0.xsd">
+  <name>BBGen</name>
+  <channel>pear.jaceju.net</channel>
+  <summary>Backbone.js Project Generator</summary>
+  <description>Backbone.js Project Generator</description>
+  <lead>
+    <name>Jace Ju</name>
+    <user/>
+    <email>jaceju@gmail.com</email>
+    <active>yes</active>
+  </lead>
+  <date>2012-04-24</date>
+  <time>18:21:01</time>
+  <version>
+    <release>0.0.1</release>
+    <api>0.0.1</api>
+  </version>
+  <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+  </stability>
+  <license>PHP</license>
+  <notes>-</notes>
+  <contents>
+    <dir name="/">
+      <file name="doc/.empty" role="doc" md5sum="d41d8cd98f00b204e9800998ecf8427e"/>
+      <file name="tests/.empty" role="test" md5sum="d41d8cd98f00b204e9800998ecf8427e"/>
+      <file name="tests/bin/.empty" role="test" md5sum="d41d8cd98f00b204e9800998ecf8427e"/>
+      <file name="tests/php/.empty" role="test" md5sum="d41d8cd98f00b204e9800998ecf8427e"/>
+      <file name="tests/www/.empty" role="test" md5sum="d41d8cd98f00b204e9800998ecf8427e"/>
+      <file name="src/.empty" role="php" md5sum="d41d8cd98f00b204e9800998ecf8427e"/>
+      <file name="src/BBGen/App.php" role="php" md5sum="dec50d4525836159c73d78c38f665c22"/>
+      <file name="data/.empty" role="data" md5sum="d41d8cd98f00b204e9800998ecf8427e"/>
+    </dir>
+  </contents>
+  <dependencies>
+    <required>
+      <php>
+        <min>5.3</min>
+      </php>
+      <pearinstaller>
+        <min>1.4</min>
+      </pearinstaller>
+    </required>
+  </dependencies>
+  <phprelease>
+    <filelist>
+      <install name="doc/.empty" as=".empty"/>
+      <install name="tests/.empty" as=".empty"/>
+      <install name="tests/bin/.empty" as="bin/.empty"/>
+      <install name="tests/php/.empty" as="php/.empty"/>
+      <install name="tests/www/.empty" as="www/.empty"/>
+      <install name="src/.empty" as=".empty"/>
+      <install name="src/BBGen/App.php" as="BBGen/App.php"/>
+      <install name="data/.empty" as=".empty"/>
+    </filelist>
+  </phprelease>
+</package>
