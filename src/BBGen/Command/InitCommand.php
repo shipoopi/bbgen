@@ -5,9 +5,15 @@ namespace BBGen\Command;
 use CLIFramework\Command;
 use CLIFramework\CommandInterface;
 use Exception;
+use BBGen\GenTool;
 
 class InitCommand extends Command implements CommandInterface
 {
+    /**
+     *
+     * @var \BBGen\Application
+     */
+    public $application;
 
     public function brief()
     {
@@ -22,76 +28,52 @@ class InitCommand extends Command implements CommandInterface
     }
 
     protected $_ini = 'backbone.ini';
-    protected $_lang = 'js';
-    protected $_tpl = 'underscore';
-    protected $_dir = 'js';
-    protected $_workingDir = '.';
 
-    public function execute($dir)
+    public function execute($dir = '.')
     {
+        $this->_initGenTool();
         $this->_initWorkingDir($dir);
         $this->_checkIniFile();
-        $this->_setOptions();
         $this->_buildIniFile();
         $this->_buildDir();
     }
 
-    protected function _getPath($file)
+    protected function _initGenTool()
     {
-        return $this->_workingDir . '/' . ltrim($file, '/');
+        GenTool\Common::$application = $this->application;
     }
 
     protected function _initWorkingDir($dir)
     {
-        $cwd = $this->application->getCurrentWorkingDir();
-        $this->_workingDir = $cwd . '/' . ltrim($dir, '/');
-        if (!file_exists($this->_workingDir)) {
-            mkdir($this->_workingDir, 0777, true);
-        }
+        $folder = new GenTool\Folder();
+        $folder->realPath = $this->application->getPath($dir);
+        $folder->generate();
     }
 
     protected function _checkIniFile()
     {
         $logger = $this->getLogger();
         $logger->info('Checking backbone.ini');
-        if (file_exists($this->_getPath($this->_ini))) {
+        if (file_exists($this->application->getPath($this->_ini))) {
             throw new Exception($this->_ini . ' exists. aborting.');
-        }
-    }
-
-    protected function _setOptions()
-    {
-        $options = $this->getOptions();
-        if (isset($options->lang) && in_array($options->lang, array('js', 'coffee'))) {
-            $this->_lang = $options->lang;
-        }
-        if (isset($options->tpl)) {
-            $this->_tpl = $options->tpl;
-        }
-        if (isset($options->dir)) {
-            $this->_dir = $options->dir;
         }
     }
 
     protected function _buildIniFile()
     {
         $logger = $this->getLogger();
-        $content = array();
-
-        $content[] = 'lang = ' . $this->_lang;
-        $content[] = 'tpl = ' . $this->_tpl;
-        $content[] = 'dir = ' . $this->_dir;
-        file_put_contents($this->_getPath($this->_ini), join("\n", $content));
-
+        $config = new GenTool\Config();
+        $config->realPath = $this->application->getPath($this->_ini);
+        $config->setOptions($this->getOptions());
+        $config->generate();
         $logger->info('Done.');
     }
 
     protected function _buildDir()
     {
-        $ini = (object) parse_ini_file($this->_getPath($this->_ini));
-        $dir = $this->_getPath($ini->dir);
-        if (!is_dir($dir)) {
-            mkdir($dir);
-        }
+        $config = new \BBGen\Config($this->application->getPath($this->_ini));
+        $folder = new GenTool\Folder();
+        $folder->realPath = $config->dir;
+        $folder->generate();
     }
 }
