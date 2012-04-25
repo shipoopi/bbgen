@@ -26,8 +26,8 @@ class Application extends \CLIFramework\Application
         $this->_currentWorkingDir = getcwd();
     }
 
-    public function getCurrentWorkingDir()
+    function getPath($path = '/')
     {
-        return $this->_currentWorkingDir;
+        return $this->_currentWorkingDir . '/' . ltrim($path, '/');
     }
 }
