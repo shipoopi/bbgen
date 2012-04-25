@@ -27,9 +27,9 @@ class InitCommand extends Command implements CommandInterface
     protected $_dir = 'js';
     protected $_workingDir = '.';
 
-    public function execute($args)
+    public function execute($dir)
     {
-        $this->_initWorkingDir($args);
+        $this->_initWorkingDir($dir);
         $this->_checkIniFile();
         $this->_setOptions();
         $this->_buildIniFile();
@@ -41,10 +41,10 @@ class InitCommand extends Command implements CommandInterface
         return $this->_workingDir . '/' . ltrim($file, '/');
     }
 
-    protected function _initWorkingDir($args)
+    protected function _initWorkingDir($dir)
     {
         $cwd = $this->application->getCurrentWorkingDir();
-        $this->_workingDir = $cwd . '/' . ltrim($args, '/');
+        $this->_workingDir = $cwd . '/' . ltrim($dir, '/');
         if (!file_exists($this->_workingDir)) {
             mkdir($this->_workingDir, 0777, true);
         }
