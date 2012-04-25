@@ -2,7 +2,15 @@
 
 namespace BBGen\GenTool;
 
-interface GenToolInterface
+abstract class Common
 {
-    public function generate();
+    /**
+     *
+     * @var \BBGen\Application
+     */
+    public static $application = null;
+
+    public $realPath = '';
+
+    abstract public function generate();
 }

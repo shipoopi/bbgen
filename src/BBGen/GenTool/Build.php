@@ -2,7 +2,7 @@
 
 namespace BBGen\GenTool;
 
-class Build implements GenToolInterface
+class Build extends Common
 {
     public function generate()
     {

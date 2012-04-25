@@ -4,9 +4,9 @@ namespace BBGen\GenTool;
 
 class Model extends Module
 {
-    public function generate()
+    public function getContent()
     {
-        file_put_contents('Model.js', "define(function () {
+        return "define(function () {
   return Backbone.Model.extend({
     defaults: {
       id: null,
@@ -25,6 +25,6 @@ class Model extends Module
       }
     }
   });
-});");
+});";
     }
 }

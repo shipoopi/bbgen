@@ -2,11 +2,11 @@
 
 namespace BBGen\GenTool;
 
-class Main implements GenToolInterface
+class Main extends Common
 {
-    public function generate()
+    public function getContent()
     {
-        file_put_contents('main.js', "require({
+        return "require({
   baseUrl: './',
   paths: {
     order: 'lib/requirejs/order',
@@ -23,6 +23,6 @@ require([
   App = _.last(arguments);
   App.initialize();
 });
-");
+";
     }
 }

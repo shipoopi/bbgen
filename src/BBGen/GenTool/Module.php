@@ -2,10 +2,14 @@
 
 namespace BBGen\GenTool;
 
-class Module implements GenToolInterface
+class Module extends File
 {
-    public function generate()
+    public function getContent()
     {
-        
+        return "define([
+], function () {
+  return {};
+});
+";
     }
 }

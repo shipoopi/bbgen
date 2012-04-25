@@ -4,7 +4,7 @@ namespace BBGen\GenTool;
 
 class View extends Module
 {
-    public function generate()
+    public function getContent()
     {
         file_put_contents('View.js', "define(function () {
   return Backbone.View.extend({
