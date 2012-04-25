@@ -2,7 +2,7 @@
 
 namespace BBGen\GenTool;
 
-class File extends Common
+abstract class File extends Common
 {
     abstract public function getContent();
 
