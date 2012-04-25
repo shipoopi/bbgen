@@ -33,7 +33,6 @@ class InitCommand extends Command implements CommandInterface
     {
         $this->_initGenTool();
         $this->_initWorkingDir($dir);
-        $this->_checkIniFile();
         $this->_buildIniFile();
         $this->_buildDir();
     }
@@ -50,20 +49,15 @@ class InitCommand extends Command implements CommandInterface
         $folder->generate();
     }
 
-    protected function _checkIniFile()
-    {
-        $logger = $this->getLogger();
-        $logger->info('Checking backbone.ini');
-        if (file_exists($this->application->getPath($this->_ini))) {
-            throw new Exception($this->_ini . ' exists. aborting.');
-        }
-    }
-
     protected function _buildIniFile()
     {
         $logger = $this->getLogger();
         $config = new GenTool\Config();
         $config->realPath = $this->application->getPath($this->_ini);
+        $logger->info('Checking backbone.ini');
+        if ($config->isExists()) {
+            throw new Exception($this->_ini . ' exists. aborting.');
+        }
         $config->setOptions($this->getOptions());
         $config->generate();
         $logger->info('Done.');
